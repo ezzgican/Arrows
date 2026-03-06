@@ -8,22 +8,30 @@ public static class BoardRules
     {
         if (boardState == null || arrow == null)
         {
+            
             return false;
         }
 
         GridPosition step = DirectionUtility.ToGridOffset(arrow.Direction);
         GridPosition current = arrow.Position.Add(step);
 
+
+
         while (boardState.IsInside(current))
         {
+            
+
             if (boardState.HasArrowAt(current))
             {
+                ArrowData blockingArrow = boardState.GetArrowAt(current);
+               
                 return false;
             }
 
             current = current.Add(step);
         }
 
+       
         return true;
     }
     public static bool IsLevelComplete(BoardState boardState)

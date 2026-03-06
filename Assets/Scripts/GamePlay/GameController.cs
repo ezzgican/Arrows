@@ -41,20 +41,26 @@ public class GameController : MonoBehaviour
     {
         if (!isInitialized || isBusy)
         {
+           
             return false;
         }
 
         ArrowData arrow = boardState.GetArrowById(arrowId);
         if (arrow == null)
         {
+            
             return false;
         }
+
+       
 
         if (!BoardRules.CanArrowExit(boardState, arrow))
         {
+           
             return false;
         }
 
+        
         isBusy = true;
         OnArrowRemovalStarted?.Invoke(arrow);
         return true;

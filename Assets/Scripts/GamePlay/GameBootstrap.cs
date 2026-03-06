@@ -10,23 +10,27 @@ public class GameBootstrap : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("GameBootstrap Start called");
+
         if (levelData == null)
         {
-            Debug.LogError("GameBootstrap: LevelDataSO reference is missing.");
+            
             return;
         }
 
         if (gameController == null)
         {
-            Debug.LogError("GameBootstrap: GameController reference is missing.");
+           
             return;
         }
 
         if (boardView == null)
         {
-            Debug.LogError("GameBootstrap: BoardView reference is missing.");
+            
             return;
         }
+
+       
 
         List<ArrowData> arrows = BuildArrowDataList(levelData);
         BoardState boardState = new BoardState(levelData.width, levelData.height, arrows);
@@ -42,6 +46,8 @@ public class GameBootstrap : MonoBehaviour
         for (int i = 0; i < data.arrows.Count; i++)
         {
             ArrowSpawnData spawnData = data.arrows[i];
+
+           
 
             ArrowData arrow = new ArrowData(
                 i,

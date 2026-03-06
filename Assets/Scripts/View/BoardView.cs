@@ -17,18 +17,20 @@ public class BoardView : MonoBehaviour
 
     public void Initialize(BoardState initialBoardState, GameController controller)
     {
+        
+
         boardState = initialBoardState;
         gameController = controller;
 
         if (arrowViewPrefab == null)
         {
-            Debug.LogError("BoardView: ArrowView prefab reference is missing.");
+            
             return;
         }
 
         if (arrowContainer == null)
         {
-            Debug.LogError("BoardView: ArrowContainer reference is missing.");
+            
             return;
         }
 
@@ -60,6 +62,7 @@ public class BoardView : MonoBehaviour
     private void SpawnArrowView(ArrowData arrowData)
     {
         Vector3 worldPosition = GridToWorld(arrowData.Position);
+        
 
         ArrowView arrowView = Instantiate(
             arrowViewPrefab,
@@ -96,7 +99,14 @@ public class BoardView : MonoBehaviour
 
     public Vector3 GridToWorld(GridPosition gridPosition)
     {
-        return boardOrigin + new Vector3(gridPosition.X * cellSize, gridPosition.Y * cellSize, 0f);
+        float offsetX = (boardState.Width - 1) * 0.5f;
+        float offsetY = (boardState.Height - 1) * 0.5f;
+
+        return boardOrigin + new Vector3(
+            (gridPosition.X - offsetX) * cellSize,
+            (gridPosition.Y - offsetY) * cellSize,
+            0f
+        );
     }
 
     private Vector3 GetExitWorldPosition(ArrowData arrowData)
@@ -107,4 +117,5 @@ public class BoardView : MonoBehaviour
 
         return boardExitWorldPosition + extraOffset;
     }
+   
 }
